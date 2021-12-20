@@ -1,9 +1,9 @@
 import Layout from 'components/general-components/layout/layout'
 import ProductPageResponse from 'model/product/productPageResponse'
 import React from 'react'
-import ProductCard from '../components/product-card/productCard'
-import Product from '../service/project-shop/product'
 import { AxiosResponse } from 'axios'
+import ProductCard from 'components/product-card/productCard'
+import Product from 'service/project-shop/product'
 
 interface IProps { }
 
@@ -48,12 +48,12 @@ class ShopHomePage extends React.PureComponent<IProps, IState> {
             <div className="bg-gray-100 min-h-screen">
                 <Layout>
                 </Layout>
-                <div className="w-3/5 block ml-auto mr-auto">
+                <div className="w-9/12 block ml-auto mr-auto">
 
                     <div className="flex flex-wrap">
                         {this.mapData()}
                     </div>
-                </div>
+                </div>  
             </div>
         )
     }

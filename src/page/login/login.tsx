@@ -7,6 +7,7 @@ import Cookies from "js-cookie"
 import UserAuth from 'model/login/response/userAuth';
 import { ServiceResponse } from 'constants/serviceResponse';
 import { AxiosResponse } from 'axios'
+import AlertBox from 'components/general-components/alert/alertBox';
 
 interface IProps {
 }
@@ -18,6 +19,9 @@ interface IState {
 }
 
 class LoginPage extends React.PureComponent<IProps, IState> {
+
+    private readonly alertBox: React.RefObject<any>
+
     private loginService: LoginService = new LoginService();
 
     constructor(props: IProps) {
@@ -27,6 +31,7 @@ class LoginPage extends React.PureComponent<IProps, IState> {
             userName: '',
             password: ''
         }
+        this.alertBox = React.createRef()
     }
 
     public async login(): Promise<void> {
@@ -42,26 +47,39 @@ class LoginPage extends React.PureComponent<IProps, IState> {
             userAuth.email = user.data.email
             userAuth.role = user.data.role
             await Cookies.set('user_auth', JSON.stringify(userAuth), { expires: 7, path: '' })
+            this.showAlertBox('login สำเร็จ', 'success')
             window.location.href = "/shop-list"
-        } catch (error) {
+        } catch (error: any) {
+            this.showAlertBox('login ไม่สำเร็จ', 'error', error.response?.data?.errorMessage || error.stack)
             console.error(error)
         }
     }
 
+    public showAlertBox(mainTitle: string, alertType: string, subTitle?: string) {
+        this.alertBox.current.showBox({
+            mainTitle: mainTitle,
+            subTitle: subTitle,
+            type: alertType,
+            time: 5,
+            autoClose: true,
+            show: true
+        })
+    }
+
     public render(): JSX.Element {
         return (
-            <div className="w-full min-h-screen text-center pt-52 bg-gradient-to-t from-green-300 via-green-500 to-green-900">
+            <div className="w-full min-h-screen text-center pt-28 bg-gradient-to-t from-green-300 via-green-500 to-green-900">
                 <div className="">
                     <img className="w-40 h-40 block ml-auto mr-auto" src={Image} alt='icon-shop'></img>
                 </div>
                 <div className="mt-4">
-                    <label>user name</label>
+                    <label className="mb-2">user name</label>
                     <div>
                         <input onChange={e => this.setState({ userName: e.target.value })} value={this.state.userName} className={'leading-10 border rounded h-9 w-60 p-2'}></input>
                     </div>
                 </div>
                 <div className="mt-4">
-                    <label>password</label>
+                    <label className="mb-2">password</label>
                     <div>
                         <input onChange={e => this.setState({ password: e.target.value })} value={this.state.password} type="password" className={'leading-10 border rounded h-9 w-60 p-2'}></input>
                     </div>
@@ -74,6 +92,7 @@ class LoginPage extends React.PureComponent<IProps, IState> {
                         สมัครบัญชีผู้ใช้
                     </Button>
                 </div>
+                <AlertBox ref={this.alertBox} />
             </div>
         )
     }

@@ -21,17 +21,17 @@ class ProductCard extends React.Component<IProps, IState> {
 
     public render(): JSX.Element {
         return (
-            <div className="border-2 rounded bg-white w-52 h-80 cursor-pointer m-2 hover:border-red-400" onClick={() => window.location.href=`/cart/${this.props.productModel.id}`} >
+            <div className="border-2 rounded bg-white w-40 h-72 cursor-pointer m-2 hover:border-red-400" onClick={() => window.location.href=`/cart/${this.props.productModel.id}`} >
                 <img
                     className="w-52 h-44"
                     src={this.props.productModel.key}
-                    alt="productImg"
+                    alt="productImg"    
                     onError={defaultImage => {
                         (defaultImage.target as HTMLImageElement).onerror = null;
                         (defaultImage.target as HTMLImageElement).src = Image
                     }}
                 />
-                <div className="p-2 w-full">
+                <div className="p-2 w-full text-xs">
                     <div>
                         <label className="font-bold">{this.props.productModel.name}</label>
                     </div>

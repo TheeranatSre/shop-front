@@ -4,7 +4,7 @@ import React from 'react'
 interface IProps {
   onClick?: () => void
   className?: string
-  color?: 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'light' | 'dark' | 'muted' | 'white'
+  color?: 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info' | 'light' | 'dark' | 'muted' | 'white' | 'orange'
   type?: 'button' | 'submit' | 'reset'
   disabled?: boolean
 }
@@ -19,9 +19,11 @@ const Button: React.FunctionComponent<IProps> = props => {
       case 'danger':
         return '#E84724'
       case 'warning':
-        return '#D88E30'
+        return '#f5bf2c'
       case 'white':
-        return 'white'
+        return '#ffffff'
+      case 'orange':
+        return '#ffa32b'
       default:
         return '#08614b'
     }
