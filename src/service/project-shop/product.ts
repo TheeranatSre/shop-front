@@ -20,6 +20,14 @@ class Product {
             }
         })
     }
+
+    public postProducts(userId: number, product: ProductModel): ServiceResponse<ProductModel> {
+        return AxiosHttpServer.axios.post('/products', product, {
+            headers: {
+                userId: userId
+            }
+        })
+    }
 }
 
 export default Product

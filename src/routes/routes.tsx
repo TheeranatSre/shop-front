@@ -7,8 +7,9 @@ import RegisterPage from '../page/register/register';
 import ShopHomePage from '../page/shop/shopHomePage';
 import PageNotFound from '../page/_general/error/PageNotFound';
 import ProductDetail from '../page/shop/productDetail'
-import MyProduct from '../page/shop/myProdect'
-import CreateProduct from '../page/shop/createProduct'
+import MyProductList from '../page/shop/myProdectList'
+import CreateProduct from '../page/myproduct/createProduct'
+import MyProduct from '../page/shop/myProduct'
 
 interface IProps {
     // auth: AuthStoreType
@@ -22,9 +23,11 @@ export default (props: IProps) => (
             <Route path="/login" element={<LoginPage />} />
             <Route path="/new-register" element={<RegisterPage />} />
             <Route path="/shop-list" element={<ShopHomePage />} />
-            <Route path="/cart/:id" element={<ProductDetail />} />
-            <Route path="/my-product" element={<MyProduct />} />
+            <Route path="/card/:id" element={<ProductDetail />} />
+            <Route path="/my-card/:id" element={<MyProduct />} />
+            <Route path="/my-products" element={<MyProductList />} />
             <Route path="/create-product" element={<CreateProduct />} />
+            <Route path="/" element={<ShopHomePage />} />
             {Cookies.get('user_auth') ? (
                 <Route path="/callback" element={<ShopHomePage />} />
             ) : (<Route element={<PageNotFound />} />)}

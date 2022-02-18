@@ -4,6 +4,7 @@ import Image from '../../public/static/icon/productIcon.png'
 
 interface IProps {
     productModel: ProductModel
+    urlPath: string
 }
 
 interface IState {
@@ -21,9 +22,9 @@ class ProductCard extends React.Component<IProps, IState> {
 
     public render(): JSX.Element {
         return (
-            <div className="border-2 rounded bg-white w-40 h-72 cursor-pointer m-2 hover:border-red-400" onClick={() => window.location.href=`/cart/${this.props.productModel.id}`} >
+            <div className="border-2 rounded bg-white w-60 h-96 cursor-pointer m-2 hover:border-red-400" onClick={() => window.location.href=`/${this.props.urlPath}/${this.props.productModel.id}`} >
                 <img
-                    className="w-52 h-44"
+                    className="w-60 h-64"
                     src={this.props.productModel.key}
                     alt="productImg"    
                     onError={defaultImage => {
